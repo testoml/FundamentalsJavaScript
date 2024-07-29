@@ -1,14 +1,23 @@
 # Data Types
-JavaScript has several built-in data types that can be categorized into two main groups: primitive types and reference types. Here's an overview of each:
+JavaScript has several built-in data types that can be categorized into two main groups: **primitive** types and **reference types**. Here's an overview of each:
 
 ## Primitive Types
+ A primitive literal is a value, with no wrapper or properties of its own. Primitive literals are immutable, meaning they can't be changed to represent other values in the same way that JavaScript's more complex object-based data structures can.
 **Number**: Represents both integer and floating-point numbers. Special numeric values include Infinity, -Infinity, and NaN (Not-a-Number).
 ```js
 let age = 25;
 let price = 19.99;
 let bigNumber = 1.23e6; // 1.23 * 10^6
 ```
-**String**: Represents a sequence of characters. Strings are immutable. Can be defined using single quotes, double quotes, or backticks (template literals).
+If a value can't be converted, as in the case of undefined or a string containing non-numeric characters, the Number function returns NaN:
+```js
+Number( undefined );
+//> NaN
+
+Number( "The number 3." );
+//> NaN
+```
+**String**: Represents a sequence of characters. Strings are immutable. Can be defined using single quotes, double quotes, or backticks (template literals).Values that result in false include 0, null, undefined, NaN, an empty string (""), an omitted value, and a false boolean. All other values result in true.
 ```js
 let name = "Alice";
 let greeting = 'Hello, world!';
@@ -24,16 +33,21 @@ let isLoggedIn = false;
 let x;
 console.log(x); // undefined
 ```
-
 **Null**: Represents the intentional absence of any object value.
 ```js
 let y = null;
 ```
+| Although `undefined` and `null` have some functional overlap, they have different purposes. In the strictest sense, `null` represents a value intentionally defined as "blank," and `undefined` represents a lack of any assigned value.
 **Symbol**: A unique and immutable data type used as an identifier for object properties.
 ```js
 let sym = Symbol('description');
 ```
-**BigInt**:  Used for integers larger than the safe limit for Number (2^53 - 1). Created by appending n to the end of an integer or using BigInt constructor.
+There are three types of symbols:
+- Symbols created with Symbol()
+- Shared symbols that are set and retrieved from a global Symbol registry using Symbol.for()
+- "Well-known symbols" defined as static properties on the Symbol object. These symbols contain internal methods that can't be accidentally overwritten.
+
+**BigInt**:  Used for integers larger than the safe limit for Number (2^53 - 1). Created by appending n to the end of an integer or using BigInt constructor.  Most importantly, you can't mix BigInt and Number primitives in standard arithmetic operations.
 ```js
 let big = 1234567890123456789012345678901234567890n;
 let big2 = BigInt("1234567890123456789012345678901234567890");
